@@ -1,0 +1,27 @@
+  int minDeletions(string s) {
+        int a[26];
+        memset(a,0,sizeof(a));
+        int maxi = INT_MIN;
+        for(int i=0;i<s.length();i++){
+            a[s[i]-'a']++;
+            maxi = max(maxi,a[s[i]-'a']);
+        }
+        unordered_map<int,int> m;
+        for(int i=0;i<26;i++){
+           if(a[i]>0) m[a[i]]++;
+        }
+        
+        int ans=0,temp=0;
+        for(int i=maxi;i>0;i--){
+            //temp=0;
+            if(m.find(i) == m.end()){
+                if(temp>0) temp = temp-1;
+            }else{
+                 temp = m[i]+temp-1;
+            }
+            
+            ans+= temp;
+          //  prev = temp;
+        }
+        return ans;
+    }
