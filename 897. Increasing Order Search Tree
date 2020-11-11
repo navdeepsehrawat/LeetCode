@@ -1,0 +1,21 @@
+ TreeNode* cur;
+    
+    void fn(TreeNode* root){
+        if(root == NULL ) return;
+        fn(root->left);
+        
+        root->left = NULL;
+        cur->right = root;
+        cur = cur->right;
+        
+        
+        fn(root->right);
+    }
+    
+    TreeNode* increasingBST(TreeNode* root) {
+        if(root == NULL) return root;
+        TreeNode* ans = new TreeNode(0);
+        cur = ans;
+        fn(root);
+        return ans->right;
+    }
